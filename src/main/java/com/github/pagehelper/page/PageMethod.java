@@ -198,9 +198,9 @@ public abstract class PageMethod {
      *
      * @param properties 插件属性
      */
-    protected static void setStaticProperties(Properties properties){
+    protected static void setStaticProperties(Properties properties) {
         //defaultCount，这是一个全局生效的参数，多数据源时也是统一的行为
-        if(properties != null){
+        if (properties != null) {
             DEFAULT_COUNT = Boolean.valueOf(properties.getProperty("defaultCount", "true"));
         }
     }

@@ -24,13 +24,25 @@
 
 package com.github.pagehelper.parser;
 
-import com.github.pagehelper.PageException;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Function;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
-import net.sf.jsqlparser.statement.select.*;
+import net.sf.jsqlparser.statement.select.FromItem;
+import net.sf.jsqlparser.statement.select.Join;
+import net.sf.jsqlparser.statement.select.LateralSubSelect;
+import net.sf.jsqlparser.statement.select.OrderByElement;
+import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.Select;
+import net.sf.jsqlparser.statement.select.SelectBody;
+import net.sf.jsqlparser.statement.select.SelectExpressionItem;
+import net.sf.jsqlparser.statement.select.SelectItem;
+import net.sf.jsqlparser.statement.select.SetOperationList;
+import net.sf.jsqlparser.statement.select.SubJoin;
+import net.sf.jsqlparser.statement.select.SubSelect;
+import net.sf.jsqlparser.statement.select.ValuesList;
+import net.sf.jsqlparser.statement.select.WithItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +82,7 @@ public class CountSqlParser {
         //解析SQL
         Statement stmt = null;
         //特殊sql不需要去掉order by时，使用注释前缀
-        if(sql.indexOf(KEEP_ORDERBY) >= 0){
+        if (sql.indexOf(KEEP_ORDERBY) >= 0) {
             return getSimpleCountSql(sql);
         }
         try {
@@ -131,7 +143,7 @@ public class CountSqlParser {
         SelectBody selectBody = select.getSelectBody();
         // 是否能简化count查询
         List<SelectItem> COUNT_ITEM = new ArrayList<SelectItem>();
-        COUNT_ITEM.add(new SelectExpressionItem(new Column("count(" + name +")")));
+        COUNT_ITEM.add(new SelectExpressionItem(new Column("count(" + name + ")")));
         if (selectBody instanceof PlainSelect && isSimpleCount((PlainSelect) selectBody)) {
             ((PlainSelect) selectBody).setSelectItems(COUNT_ITEM);
         } else {

@@ -47,8 +47,8 @@ public abstract class AbstractRowBoundsDialect extends AbstractDialect {
 
     @Override
     public boolean beforeCount(MappedStatement ms, Object parameterObject, RowBounds rowBounds) {
-        if(rowBounds instanceof PageRowBounds){
-            PageRowBounds pageRowBounds = (PageRowBounds)rowBounds;
+        if (rowBounds instanceof PageRowBounds) {
+            PageRowBounds pageRowBounds = (PageRowBounds) rowBounds;
             return pageRowBounds.getCount() == null || pageRowBounds.getCount();
         }
         return false;

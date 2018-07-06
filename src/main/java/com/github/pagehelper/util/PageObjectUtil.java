@@ -38,7 +38,9 @@ import java.util.Map;
  * @author liuzh
  */
 public abstract class PageObjectUtil {
-    //request获取方法
+    /**
+     * request获取方法
+     */
     protected static Boolean hasRequest;
     protected static Class<?> requestClass;
     protected static Method getParameterMap;
@@ -94,7 +96,7 @@ public abstract class PageObjectUtil {
             Object _pageNum = getParamValue(paramsObject, "pageNum", required);
             Object _pageSize = getParamValue(paramsObject, "pageSize", required);
             if (_pageNum == null || _pageSize == null) {
-                if(hasOrderBy){
+                if (hasOrderBy) {
                     Page page = new Page();
                     page.setOrderBy(orderBy.toString());
                     page.setOrderByOnly(true);

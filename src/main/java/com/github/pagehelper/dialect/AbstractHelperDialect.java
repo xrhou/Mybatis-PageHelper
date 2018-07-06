@@ -202,7 +202,7 @@ public abstract class AbstractHelperDialect extends AbstractDialect implements C
             page.setTotal(-1);
         } else if ((page.getPageSizeZero() != null && page.getPageSizeZero()) && page.getPageSize() == 0) {
             page.setTotal(pageList.size());
-        } else if(page.isOrderByOnly()){
+        } else if (page.isOrderByOnly()) {
             page.setTotal(pageList.size());
         }
         return page;

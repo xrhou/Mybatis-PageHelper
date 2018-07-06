@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author liuzh/abel533/isea533
  * @version 3.6.0
- *          项目地址 : http://git.oschina.net/free/Mybatis_PageHelper
+ * @desc 项目地址 : http://git.oschina.net/free/Mybatis_PageHelper
  */
 public class Page<E> extends ArrayList<E> implements Closeable {
     private static final long serialVersionUID = 1L;
@@ -158,7 +158,7 @@ public class Page<E> extends ArrayList<E> implements Closeable {
     }
 
     public Page<E> setPageNum(int pageNum) {
-        //分页合理化，针对不合理的页码自动处理
+        /**** 分页合理化，针对不合理的页码自动处理 */
         this.pageNum = ((reasonable != null && reasonable) && pageNum <= 0) ? 1 : pageNum;
         return this;
     }
@@ -230,6 +230,7 @@ public class Page<E> extends ArrayList<E> implements Closeable {
         }
         return this;
     }
+
     public String getOrderBy() {
         return orderBy;
     }

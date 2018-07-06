@@ -28,7 +28,11 @@ import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
+import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
@@ -36,17 +40,17 @@ import java.util.Properties;
 
 /**
  * QueryInterceptor 规范
- *
+ * <p>
  * 详细说明见文档：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/Interceptor.md
  *
  * @author liuzh/abel533/isea533
  * @version 1.0.0
  */
 @Intercepts(
-    {
-        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
-        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
-    }
+        {
+                @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+                @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
+        }
 )
 public class QueryInterceptor implements Interceptor {
 
@@ -61,7 +65,7 @@ public class QueryInterceptor implements Interceptor {
         CacheKey cacheKey;
         BoundSql boundSql;
         //由于逻辑关系，只会进入一次
-        if(args.length == 4){
+        if (args.length == 4) {
             //4 个参数时
             boundSql = ms.getBoundSql(parameter);
             cacheKey = executor.createCacheKey(ms, parameter, rowBounds, boundSql);

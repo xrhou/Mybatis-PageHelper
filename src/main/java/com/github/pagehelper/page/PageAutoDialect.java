@@ -27,7 +27,13 @@ package com.github.pagehelper.page;
 import com.github.pagehelper.Dialect;
 import com.github.pagehelper.PageException;
 import com.github.pagehelper.dialect.AbstractHelperDialect;
-import com.github.pagehelper.dialect.helper.*;
+import com.github.pagehelper.dialect.helper.Db2Dialect;
+import com.github.pagehelper.dialect.helper.HsqldbDialect;
+import com.github.pagehelper.dialect.helper.InformixDialect;
+import com.github.pagehelper.dialect.helper.MySqlDialect;
+import com.github.pagehelper.dialect.helper.OracleDialect;
+import com.github.pagehelper.dialect.helper.SqlServer2012Dialect;
+import com.github.pagehelper.dialect.helper.SqlServerDialect;
 import com.github.pagehelper.util.StringUtil;
 import org.apache.ibatis.mapping.MappedStatement;
 
@@ -49,7 +55,7 @@ public class PageAutoDialect {
 
     private static Map<String, Class<? extends Dialect>> dialectAliasMap = new HashMap<String, Class<? extends Dialect>>();
 
-    public static void registerDialectAlias(String alias, Class<? extends Dialect> dialectClass){
+    public static void registerDialectAlias(String alias, Class<? extends Dialect> dialectClass) {
         dialectAliasMap.put(alias, dialectClass);
     }
 
@@ -233,7 +239,7 @@ public class PageAutoDialect {
             String[] alias = dialectAlias.split(";");
             for (int i = 0; i < alias.length; i++) {
                 String[] kv = alias[i].split("=");
-                if(kv.length != 2){
+                if (kv.length != 2) {
                     throw new IllegalArgumentException("dialectAlias 参数配置错误，" +
                             "请按照 alias1=xx.dialectClass;alias2=dialectClass2 的形式进行配置!");
                 }

@@ -24,7 +24,6 @@
 
 package com.github.pagehelper;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -135,11 +134,11 @@ public class PageInfo<T> extends PageSerializable<T> {
         }
     }
 
-    public static <T> PageInfo<T> of(List<T> list){
+    public static <T> PageInfo<T> of(List<T> list) {
         return new PageInfo<T>(list);
     }
 
-    public static <T> PageInfo<T> of(List<T> list, int navigatePages){
+    public static <T> PageInfo<T> of(List<T> list, int navigatePages) {
         return new PageInfo<T>(list, navigatePages);
     }
 
@@ -200,7 +199,8 @@ public class PageInfo<T> extends PageSerializable<T> {
      */
     private void judgePageBoudary() {
         isFirstPage = pageNum == 1;
-        isLastPage = pageNum == pages || pages == 0;;
+        isLastPage = pageNum == pages || pages == 0;
+        ;
         hasPreviousPage = pageNum > 1;
         hasNextPage = pageNum < pages;
     }
